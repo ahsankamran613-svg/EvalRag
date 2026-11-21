@@ -1,0 +1,19 @@
+# Secrets & local environment
+.env
+.venv/
+venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Generated local search indexes (rebuilt via scripts/build_index.py)
+data/chroma_db/
+data/bm25_index.pkl
+
+# OS / IDE clutter
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

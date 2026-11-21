@@ -1,0 +1,12 @@
+# =============================================================================
+# Measured RAG — Lightweight, 8GB-RAM-Friendly Dependencies (No PyTorch!)
+# We add packages milestone-by-milestone so you know why each library exists.
+# =============================================================================
+
+# --- Milestone 1: Config, Schemas, Corpus Fetching & Testing ---
+pydantic>=2.7.0
+pydantic-settings>=2.3.0
+python-dotenv>=1.0.1
+httpx>=0.27.0
+PyYAML>=6.0.1
+pytest>=8.2.0
