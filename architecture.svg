@@ -1,0 +1,202 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 1120" width="1100" height="1120" font-family="'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 1 L 8 5 L 0 9 z" fill="#d4d4d8" />
+    </marker>
+    <style>
+      .bg { fill: #18181a; }
+      .group-box { fill: #1b1b1e; stroke: #3a3a40; stroke-width: 1; }
+      .group-header { fill: #232327; stroke: #3a3a40; stroke-width: 1; }
+      .group-title { fill: #a1a1aa; font-size: 9.5px; font-weight: 500; }
+      .node { fill: #26262a; stroke: #3f3f46; stroke-width: 1; }
+      .node-text { fill: #f4f4f5; font-size: 10px; font-weight: 600; text-anchor: middle; dominant-baseline: central; }
+      .edge-box { fill: #1e1e22; stroke: #3a3a40; stroke-width: 0.8; }
+      .edge-text { fill: #a1a1aa; font-size: 9px; text-anchor: middle; dominant-baseline: central; }
+      .conn { fill: none; stroke: #6e6e77; stroke-width: 1; marker-end: url(#arrow); }
+      .conn-no-arrow { fill: none; stroke: #6e6e77; stroke-width: 1; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="1120" class="bg" />
+
+  <!-- ================================================================= -->
+  <!-- GROUP 1: 1. Curated Corpus & Dual Indexing                        -->
+  <!-- ================================================================= -->
+  <rect x="28" y="408" width="430" height="380" class="group-box" />
+  <rect x="28" y="408" width="430" height="22" class="group-header" />
+  <text x="36" y="422" class="group-title">1. Curated Corpus &amp; Dual Indexing</text>
+
+  <!-- Nodes in Group 1 -->
+  <rect x="98" y="443" width="278" height="28" class="node" />
+  <text x="237" y="457" class="node-text">Basecamp Open-Source Handbook &amp; Policies (CC BY 4.0)</text>
+
+  <rect x="169" y="505" width="136" height="28" class="node" />
+  <text x="237" y="519" class="node-text">scripts/fetch_corpus.py</text>
+
+  <rect x="184" y="567" width="106" height="28" class="node" />
+  <text x="237" y="581" class="node-text">data/corpus/*.md</text>
+
+  <rect x="90" y="628" width="294" height="28" class="node" />
+  <text x="237" y="642" class="node-text">Header-Aware Markdown Chunker (Breadcrumbs + Overlap)</text>
+
+  <rect x="41" y="689" width="204" height="28" class="node" />
+  <text x="143" y="703" class="node-text">BM25Okapi Index (data/bm25_index.pkl)</text>
+
+  <rect x="265" y="689" width="132" height="28" class="node" />
+  <text x="331" y="703" class="node-text">Gemini Embeddings API</text>
+
+  <rect x="215" y="750" width="232" height="28" class="node" />
+  <text x="331" y="764" class="node-text">ChromaDB Persistent Store (data/chroma_db/)</text>
+
+  <!-- Edges in Group 1 -->
+  <path d="M 237 471 L 237 505" class="conn" />
+  <path d="M 237 533 L 237 567" class="conn" />
+  <path d="M 237 595 L 237 628" class="conn" />
+  <path d="M 237 656 L 237 672 L 143 672 L 143 689" class="conn" />
+  <path d="M 237 672 L 331 672 L 331 689" class="conn" />
+  <path d="M 331 717 L 331 750" class="conn" />
+
+
+  <!-- ================================================================= -->
+  <!-- GROUP 2: 2. 4-Mode Retrieval & Reranking Engine                   -->
+  <!-- ================================================================= -->
+  <rect x="479" y="29" width="542" height="580" class="group-box" />
+  <rect x="479" y="29" width="542" height="22" class="group-header" />
+  <text x="487" y="43" class="group-title">2. 4-Mode Retrieval &amp; Reranking Engine</text>
+
+  <!-- User / Benchmark Query -->
+  <rect x="671" y="62" width="138" height="28" class="node" />
+  <text x="740" y="76" class="node-text">User / Benchmark Query</text>
+
+  <!-- Retrieval Mode Diamond -->
+  <polygon points="740,124 798,182 740,240 682,182" class="node" />
+  <text x="740" y="182" class="node-text">Retrieval Mode</text>
+
+  <path d="M 740 90 L 740 124" class="conn" />
+
+  <!-- Branch 1: vector -->
+  <path d="M 712 212 L 712 246 L 560 246 L 560 443" class="conn" />
+  <rect x="542" y="324" width="36" height="22" class="edge-box" />
+  <text x="560" y="335" class="edge-text">vector</text>
+
+  <rect x="490" y="443" width="140" height="28" class="node" />
+  <text x="560" y="457" class="node-text">ChromaDB Cosine Top-K</text>
+
+  <!-- Branch 2: hybrid / hybrid_rerank -->
+  <path d="M 740 240 L 740 321" class="conn" />
+  <rect x="694" y="269" width="92" height="22" class="edge-box" />
+  <text x="740" y="280" class="edge-text">hybrid / hybrid_rerank</text>
+
+  <rect x="660" y="321" width="160" height="28" class="node" />
+  <text x="740" y="335" class="node-text">BM25 Top-20 + Vector Top-20</text>
+
+  <path d="M 740 349 L 740 383" class="conn" />
+
+  <rect x="658" y="383" width="164" height="28" class="node" />
+  <text x="740" y="397" class="node-text">Reciprocal Rank Fusion (k=60)</text>
+
+  <!-- Sub-branch: hybrid -->
+  <path d="M 714 411 L 714 420 L 664 420 L 664 545 L 732 545 L 732 567" class="conn" />
+  <rect x="647" y="447" width="34" height="22" class="edge-box" />
+  <text x="664" y="458" class="edge-text">hybrid</text>
+
+  <!-- Sub-branch: hybrid_rerank -->
+  <path d="M 766 411 L 766 420 L 816 420 L 816 505" class="conn" />
+  <rect x="784" y="447" width="64" height="22" class="edge-box" />
+  <text x="816" y="458" class="edge-text">hybrid_rerank</text>
+
+  <rect x="673" y="505" width="286" height="28" class="node" />
+  <text x="816" y="519" class="node-text">Cross-Encoder Reranker (Cohere v3.5 / FlashRank ONNX)</text>
+
+  <!-- Branch 3: bm25 -->
+  <path d="M 768 212 L 768 246 L 966 246 L 966 383" class="conn" />
+  <rect x="950" y="269" width="32" height="22" class="edge-box" />
+  <text x="966" y="280" class="edge-text">bm25</text>
+
+  <rect x="924" y="383" width="84" height="28" class="node" />
+  <text x="966" y="397" class="node-text">BM25 Top-K</text>
+
+  <!-- Convergence to Top-5 Chunks -->
+  <rect x="694" y="567" width="92" height="28" class="node" />
+  <text x="740" y="581" class="node-text">Top-5 Chunks</text>
+
+  <!-- Vector -> Top-5 Chunks -->
+  <path d="M 560 471 L 560 554 L 712 554 L 712 567" class="conn" />
+  <!-- Reranker -> Top-5 Chunks -->
+  <path d="M 816 533 L 816 545 L 749 545 L 749 567" class="conn" />
+  <!-- BM25 -> Top-5 Chunks -->
+  <path d="M 966 411 L 966 554 L 768 554 L 768 567" class="conn" />
+
+
+  <!-- ================================================================= -->
+  <!-- GROUP 3: 3. Grounded Generation                                   -->
+  <!-- ================================================================= -->
+  <rect x="607" y="652" width="267" height="134" class="group-box" />
+  <rect x="607" y="652" width="267" height="22" class="group-header" />
+  <text x="615" y="666" class="group-title">3. Grounded Generation</text>
+
+  <rect x="619" y="688" width="243" height="28" class="node" />
+  <text x="740" y="702" class="node-text">Gemini Generator (Strict Citation + Refusal Prompt)</text>
+
+  <rect x="639" y="750" width="203" height="28" class="node" />
+  <text x="740" y="764" class="node-text">Answer + Citations + Score Provenance</text>
+
+  <path d="M 740 595 L 740 688" class="conn" />
+  <path d="M 740 716 L 740 750" class="conn" />
+
+
+  <!-- ================================================================= -->
+  <!-- GROUP 4: 4. 50-Question 4-Way Automated Evaluation                -->
+  <!-- ================================================================= -->
+  <rect x="68" y="830" width="824" height="195" class="group-box" />
+  <rect x="68" y="830" width="824" height="22" class="group-header" />
+  <text x="76" y="844" class="group-title">4. 50-Question 4-Way Automated Evaluation</text>
+
+  <!-- Left column in Group 4 -->
+  <rect x="139" y="863" width="154" height="28" class="node" />
+  <text x="216" y="877" class="node-text">data/eval/questions_50.json</text>
+
+  <rect x="80" y="925" width="272" height="28" class="node" />
+  <text x="216" y="939" class="node-text">Resumable Eval Runner (Checkpoints + Rate-Limit Retry)</text>
+
+  <rect x="180" y="986" width="72" height="28" class="node" />
+  <text x="189" y="1000" class="group-title" style="fill: #d4d4d8; font-size: 9.5px; text-anchor: start;">2. 4-Mode Retrieval &amp; Reranking Engine</text>
+
+  <path d="M 216 891 L 216 925" class="conn" />
+  <path d="M 216 953 L 216 986" class="conn" />
+
+  <!-- Right columns in Group 4 -->
+  <rect x="319" y="863" width="261" height="28" class="node" />
+  <text x="449" y="877" class="node-text">Deterministic Metrics (Hit@5, MRR, NDCG, Refusal Acc)</text>
+
+  <rect x="601" y="863" width="279" height="28" class="node" />
+  <text x="740" y="877" class="node-text">Ragas Judge (Precision, Recall, Faithfulness, Relevancy)</text>
+
+  <rect x="473" y="925" width="245" height="28" class="node" />
+  <text x="595" y="939" class="node-text">Report Generator (Charts + README Scorecard)</text>
+
+  <!-- Connections from Answer + Citations + Score Provenance -->
+  <path d="M 740 778 L 740 863" class="conn" />
+  <path d="M 740 793 L 449 793 L 449 863" class="conn" />
+  <path d="M 740 793 L 992 793 L 992 808" class="conn" />
+
+  <!-- Streamlit App: Tab 1 (Live Q&A) -->
+  <rect x="912" y="808" width="160" height="28" class="node" />
+  <text x="992" y="822" class="node-text">Streamlit App: Tab 1 (Live Q&amp;A)</text>
+
+  <!-- Metrics & Ragas -> Report Generator -->
+  <path d="M 449 891 L 449 908 L 595 908 L 595 925" class="conn" />
+  <path d="M 740 891 L 740 908 L 595 908" class="conn-no-arrow" />
+
+  <!-- Report Generator -> Outputs -->
+  <path d="M 595 953 L 595 1007 L 488 1007 L 488 1063" class="conn" />
+  <path d="M 595 1007 L 702 1007 L 702 1063" class="conn" />
+
+  <!-- Bottom Output Nodes -->
+  <rect x="391" y="1063" width="194" height="28" class="node" />
+  <text x="488" y="1077" class="node-text">Streamlit App: Tab 2 (Eval Scorecard)</text>
+
+  <rect x="605" y="1063" width="194" height="28" class="node" />
+  <text x="702" y="1077" class="node-text">README.md Auto-Updated Scorecard</text>
+</svg>
